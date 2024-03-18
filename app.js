@@ -1,8 +1,11 @@
 import express from "express";
-import "./models/database.js"
+import "./models/database.js";
 import { getAllClientes } from "./models/database.js";
+import routes from "./routes/index.js";
 const app = express();
-app.use(express.json()); 
+routes(app);
+
+//app.use(express.json()); 
 
 const clientes = [
     {
@@ -28,12 +31,15 @@ function buscaCliente(id){
 }
 
 app.get("/", (req, res) => {
-    res.status(200).send("Node.js APP");
+    res.status(200).send("nodeJs APP");
 });
 
+/*
 app.get("/clientes", async (req, res) => {
-    res.status(200).json(await getAllClientes());
+    const listaClientes = await getAllClientes(); 
+    res.status(200).json(listaClientes);
 });
+*/
 
 app.get("/clientes/:id" , (req, res) => {
     const index = buscaCliente(req.params.id);
