@@ -26,8 +26,8 @@ async function createTableClientes(){
       '(id INT PRIMARY KEY AUTO_INCREMENT, nome TEXT, sobrenome TEXT, email TEXT, idade INT);'
     );
   
-    console.log(results); // results contains rows returned by server
-    console.log(fields); // fields contains extra meta data about results, if available
+    //console.log(results); // results contains rows returned by server
+    //console.log(fields); // fields contains extra meta data about results, if available
   } catch (err) {
     console.log(err);
   }  
@@ -39,8 +39,8 @@ export async function instertIntoTable(){
       'INSERT INTO clientes (nome, sobrenome, email, idade) VALUES("Germano Da Picareta", "Ozvaldo", "pickaxeGuy@diamond.com", 22);'
     );
   
-    console.log(results); // results contains rows returned by server
-    console.log(fields); // fields contains extra meta data about results, if available
+    //console.log(results); // results contains rows returned by server
+    //console.log(fields); // fields contains extra meta data about results, if available
   } catch (err) {
     console.log(err);
   }  
@@ -52,12 +52,27 @@ export async function getAllClientes(){
       'SELECT * FROM clientes;'
     );
     
-    console.log(results); // results contains rows returned by server
-    console.log(fields); // fields contains extra meta data about results, if available
+    //console.log(results); // results contains rows returned by server
+    //console.log(fields); // fields contains extra meta data about results, if available
     return results;
   } catch (err) {
     console.log(err);
   }  
+}
+
+export async function getClienteById(id){
+  try {
+    const [results, fields] = await connection.query(
+      'SELECT * FROM clientes WHERE id=(?);', [id]
+    );
+    
+    //console.log(results); // results contains rows returned by server
+    //console.log(fields); // fields contains extra meta data about results, if available
+    return results;
+  } catch (err) {
+    console.log(err);
+  }  
+  
 }
 
 /*

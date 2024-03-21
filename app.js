@@ -1,6 +1,6 @@
 import express from "express";
 import "./models/database.js";
-import { getAllClientes } from "./models/database.js";
+import { getAllClientes, getClienteById } from "./models/database.js";
 import routes from "./routes/index.js";
 const app = express();
 routes(app);
@@ -39,23 +39,24 @@ app.get("/clientes", async (req, res) => {
     const listaClientes = await getAllClientes(); 
     res.status(200).json(listaClientes);
 });
-*/
+
 
 app.get("/clientes/:id" , (req, res) => {
     const index = buscaCliente(req.params.id);
     res.status(200).json(clientes[index]);
 });
-
-app.post("/clientes", (req, res) => {
-    clientes.push(req.body);
-    res.status(201).send("Cliente cadastrado com sucesso!");
-});
-
 app.put("/clientes/:id", (req, res) => {
     const index = buscaCliente(req.params.id);
     clientes[index].nome = req.body.nome;
     res.status(200).json(clientes);
 });
+*/
+app.post("/clientes", (req, res) => {
+    clientes.push(req.body);
+    res.status(201).send("Cliente cadastrado com sucesso!");
+});
+
+
 
 app.delete("/clientes/:id", (req, res) =>{
     const index = buscaCliente(req.params.id);
