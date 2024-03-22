@@ -7,4 +7,8 @@ routes.get("/clientes", ClienteController.listarClientes);
 
 routes.get("/clientes/:id", ClienteController.listaClientePorId);
 
+routes.put("/clientes/:id", ClienteController.putCliente)
+
+routes.post("/clientes", ClienteController.postCliente)
+
 export default routes;
