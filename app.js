@@ -4,7 +4,6 @@ import { getAllClientes, getClienteById } from "./models/database.js";
 import routes from "./routes/index.js";
 const app = express();
 routes(app);
-
 //app.use(express.json()); 
 
 const clientes = [
@@ -49,20 +48,22 @@ app.put("/clientes/:id", (req, res) => {
     const index = buscaCliente(req.params.id);
     clientes[index].nome = req.body.nome;
     res.status(200).json(clientes);
+    
 });
-*/
-app.post("/clientes", (req, res) => {
-    clientes.push(req.body);
-    res.status(201).send("Cliente cadastrado com sucesso!");
-});
-
-
-
-app.delete("/clientes/:id", (req, res) =>{
+   app.delete("/clientes/:id", (req, res) =>{
     const index = buscaCliente(req.params.id);
     clientes.splice(index, 1);
     res.status(200).send("Cliente removido com sucesso!")
 });
+app.post("/clientes", (req, res) => {
+    clientes.push(req.body);
+    res.status(201).send("Cliente cadastrado com sucesso!");
+});
+*/
+
+
+
+
 
 export default app;
 

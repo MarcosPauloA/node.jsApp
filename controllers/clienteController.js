@@ -1,4 +1,4 @@
-import { getAllClientes, getClienteById, instertCliente, updateCliente } from "../models/database.js";
+import { getAllClientes, getClienteById, instertCliente, updateCliente, deleteCliente } from "../models/database.js";
 
 class ClienteController{
 
@@ -41,7 +41,16 @@ class ClienteController{
         }  
     }
 
-
+    static async removeCliente (req, res) {
+        try{
+            const id = req.params.id;
+            deleteCliente(id);
+            res.status(200).send("Cliente removido com sucesso!")
+        }
+        catch(erro){
+            res.status(500).json({ message: erro.message });
+        }
+    }
 }
 
 export default ClienteController;

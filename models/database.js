@@ -14,8 +14,8 @@ async function dropTableClientes(){
       'DROP TABLE clientes;'
     );
     
-    console.log(results); // results contains rows returned by server
-    console.log(fields); // fields contains extra meta data about results, if available
+    //console.log(results); // results contains rows returned by server
+    //console.log(fields); // fields contains extra meta data about results, if available
     //return results;
   } catch (err) {
     console.log(err);
@@ -84,10 +84,22 @@ export async function updateCliente(id, novoNome){
       'UPDATE clientes SET nome=(?) WHERE id=(?);', [novoNome, id]
     );
     
-    console.log(results); // results contains rows returned by server
+    //console.log(results); // results contains rows returned by server
   } catch (err) {
     console.log(err);
   }   
+}
+
+export async function deleteCliente(id){
+  try {
+    const [results] = await connection.query(
+      'DELETE FROM clientes WHERE id=(?);', [id]
+    );
+    
+    //console.log(results); // results contains rows returned by server
+  } catch (err) {
+    console.log(err);
+  }     
 }
 /*
 // A simple SELECT query
