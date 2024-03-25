@@ -1,17 +1,9 @@
-// Get the client
-import mysql from 'mysql2/promise';
-//import mysql from 'mysql2'
-// Create the connection to database
-const connection = await mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  database: 'nodeAppDatabase',
-});
+import connection from './dbConnection.js';
 
 async function dropTableClientes(){
   try {
     const [results, fields] = await connection.query(
-      'DROP TABLE clientes;'
+      'DROP TABLE produtos;'
     );
     
     //console.log(results); // results contains rows returned by server
@@ -22,11 +14,11 @@ async function dropTableClientes(){
   }  
 }
 
-async function createTableClientes(){
+async function createTableProdutos(){
   try {
     const [results, fields] = await connection.query(
-      'CREATE TABLE IF NOT EXISTS clientes ' + 
-      '(id INT PRIMARY KEY AUTO_INCREMENT, nome VARCHAR(255), sobrenome VARCHAR(255), email VARCHAR(255), idade INT);'
+      'CREATE TABLE IF NOT EXISTS produtos ' + 
+      '(id INT PRIMARY KEY AUTO_INCREMENT, nome VARCHAR(255), descricao VARCHAR(255), preco REAL, data_atualizado DATETIME);'
     );
   
     //console.log(results); // results contains rows returned by server
@@ -36,11 +28,11 @@ async function createTableClientes(){
   }  
 }
 
-export async function instertCliente(nome, sobrenome, email, idade){
+export async function insertProduto(nome, descricao, preco, data_atualizado){
   try {
-    createTableClientes();
+    createTableProdutos();
     const [results, fields] = await connection.query(
-      'INSERT INTO clientes (nome, sobrenome, email, idade) VALUES(?, ?, ?, ?);', [nome, sobrenome, email, idade]
+      'INSERT INTO produtos (nome, descricao, preco, data_atualizado) VALUES(?, ?, ?, ?);', [nome, descricao, preco, data_atualizado]
     );
   
     //console.log(results); // results contains rows returned by server
@@ -50,10 +42,10 @@ export async function instertCliente(nome, sobrenome, email, idade){
   }  
 }
 
-export async function getAllClientes(){
+export async function getAllProdutos(){
   try {
     const [results, fields] = await connection.query(
-      'SELECT * FROM clientes;'
+      'SELECT * FROM produtos;'
     );
     
     //console.log(results); // results contains rows returned by server
@@ -64,10 +56,10 @@ export async function getAllClientes(){
   }  
 }
 
-export async function getClienteById(id){
+export async function getProdutoById(id){
   try {
     const [results, fields] = await connection.query(
-      'SELECT * FROM clientes WHERE id=(?);', [id]
+      'SELECT * FROM produtos WHERE id=(?);', [id]
     );
     
     //console.log(results); // results contains rows returned by server
@@ -78,10 +70,10 @@ export async function getClienteById(id){
   }   
 }
 
-export async function updateCliente(id, novoNome){
+export async function updateProduto(id, novoNome){
   try {
     const [results] = await connection.query(
-      'UPDATE clientes SET nome=(?) WHERE id=(?);', [novoNome, id]
+      'UPDATE produtos SET nome=(?) WHERE id=(?);', [novoNome, id]
     );
     
     //console.log(results); // results contains rows returned by server
@@ -90,10 +82,10 @@ export async function updateCliente(id, novoNome){
   }   
 }
 
-export async function deleteCliente(id){
+export async function deleteProduto(id){
   try {
     const [results] = await connection.query(
-      'DELETE FROM clientes WHERE id=(?);', [id]
+      'DELETE FROM produtos WHERE id=(?);', [id]
     );
     
     //console.log(results); // results contains rows returned by server
