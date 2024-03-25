@@ -1,4 +1,4 @@
-import { getAllClientes, getClienteById, instertCliente, updateCliente, deleteCliente } from "../models/database.js";
+import { getAllClientes, getClienteById, instertCliente, updateCliente, deleteCliente } from "../models/clientesTransactions.js";
 
 class ClienteController{
 
