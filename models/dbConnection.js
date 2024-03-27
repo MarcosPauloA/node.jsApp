@@ -3,9 +3,9 @@ import mysql from 'mysql2/promise';
 
 // Create the connection to database
 const connection = await mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  database: 'nodeAppDatabase',
+    host: 'localhost',
+    user: 'root',
+    database: 'nodeAppDatabase',
 });
 
 export default connection;

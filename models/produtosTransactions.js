@@ -1,13 +1,16 @@
 import connection from './dbConnection.js';
 
-/* Funcao para destruir tabela
+/**
+ * @description Cria tabela produtos
+ */
+/*
 async function dropTableClientes() {
-      try {
-          const [results, fields] = await connection.query(
+    try {
+        await connection.query(
             'DROP TABLE produtos;'
-          );
+        );
     } catch (err) {
-    console.log(err);
+        console.log(err);
     }
 }
 */
