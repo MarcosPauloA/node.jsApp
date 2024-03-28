@@ -21,14 +21,19 @@ class ClienteController {
      * @description Recebe requisicao de get com parametro id
      * @param {object} req
      * @param {object} res
+     * @param {object} next
      */
-    static async listaClientePorId (req, res) {
+    static async listaClientePorId (req, res, next) {
         try {
             const id = req.params.id;
             const clienteEncontrado = await getClienteById(id);
-            res.status(200).json(clienteEncontrado);
+            if (JSON.stringify(clienteEncontrado) != '[]') {
+                res.status(200).json(clienteEncontrado);
+            } else {
+                res.status(404).send({message: 'Cliente não encontrado'});
+            }
         } catch (erro) {
-            res.status(500).json({ message: erro.message });
+            next(erro);
         }
     }
     /**
