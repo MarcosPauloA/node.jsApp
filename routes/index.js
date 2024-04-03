@@ -1,6 +1,6 @@
-import express from 'express';
-import clientes from './clientesRoutes.js';
-import produtos from './produtosRoutes.js';
+const express = require('express');
+const clientes = require('./clientesRoutes.js');
+const produtos = require('./produtosRoutes.js');
 
 const routes = (app) => {
     app.route('/').get((req, res) => res.status(200).send('NODE JS APP'));
@@ -10,4 +10,4 @@ const routes = (app) => {
     app.use(express.json(), produtos);
 };
 
-export default routes;
+module.exports = routes;

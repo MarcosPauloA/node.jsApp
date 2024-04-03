@@ -1,6 +1,6 @@
-import express from 'express';
-import ClienteController from '../controllers/clienteController.js';
-import ClienteMiddleware from '../middlewares/clienteMiddleware.js';
+const express = require('express');
+const ClienteController = require('../controllers/clienteController.js');
+const ClienteMiddleware = require('../middlewares/clienteMiddleware.js');
 
 const routes = express.Router();
 
@@ -17,4 +17,4 @@ routes.post('/clientes', ClienteMiddleware.validateName,
 
 routes.delete('/clientes/:id', ClienteController.removeCliente);
 
-export default routes;
+module.exports = routes;

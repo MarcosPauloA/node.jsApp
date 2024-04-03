@@ -1,12 +1,12 @@
-import express from 'express';
-import routes from './routes/index.js';
+const express = require('express');
+const routes = require('./routes/index.js');
 
 
 /*
-import createError from 'http-errors';
-import path from 'path';
-import cookieParser from 'cookie-parser';
-import logger from 'morgan';
+const createError = require('http-errors');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 */
 const app = express();
 routes(app);
@@ -40,4 +40,4 @@ app.use('/users', usersRouter);
 
 
 */
-export default app;
+module.exports = app;

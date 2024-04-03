@@ -1,5 +1,6 @@
-import { getAllClientes, getClienteById, instertCliente,
-    updateCliente, deleteCliente } from '../models/clientesTransactions.js';
+const { getAllClientes, getClienteById, instertCliente,
+    updateCliente, deleteCliente } =
+    require('../models/clientesTransactions.js');
 /**
  * @description Classe responsavel para encaminhar as requisicoes para o bd
  */
@@ -81,4 +82,4 @@ class ClienteController {
     }
 }
 
-export default ClienteController;
+module.exports = ClienteController;

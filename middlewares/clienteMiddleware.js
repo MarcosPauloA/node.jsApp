@@ -65,4 +65,4 @@ class ClienteMiddleware {
     };
 }
 
-export default ClienteMiddleware;
+module.exports = ClienteMiddleware;

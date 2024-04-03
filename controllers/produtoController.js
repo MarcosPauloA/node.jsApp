@@ -1,6 +1,6 @@
-import { getAllProdutos, getProdutoById,
-    insertProduto, updateProduto, deleteProduto }
-    from '../models/produtosTransactions.js';
+const { getAllProdutos, getProdutoById,
+    insertProduto, updateProduto, deleteProduto } =
+    require('../models/produtosTransactions.js');
 
 /**
  * @description Classe responsavel para encaminhar as requisicoes para o bd
@@ -78,4 +78,4 @@ class ProdutoController {
     }
 }
 
-export default ProdutoController;
+module.exports = ProdutoController;

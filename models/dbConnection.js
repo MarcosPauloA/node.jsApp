@@ -1,13 +1,14 @@
 // Get the client
-import mysql from 'mysql2/promise';
+const mysql = require('mysql2/promise');
 // dotenv for config.env
-import dotenv from 'dotenv';
+const dotenv = require('dotenv');
 dotenv.config();
+
 // Create the connection to database
-const connection = await mysql.createConnection({
+const connection = mysql.createConnection({
     host: process.env.MYSQL_HOST,
     user: process.env.MYSQL_USER,
     database: process.env.MYSQL_DB,
 });
 
-export default connection;
+module.exports = connection;

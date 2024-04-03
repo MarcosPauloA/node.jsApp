@@ -1,4 +1,4 @@
-import connection from './dbConnection.js';
+const connection = require('./dbConnection.js');
 
 /**
  * @description Cria tabela produtos
@@ -6,7 +6,7 @@ import connection from './dbConnection.js';
 /*
 async function dropTableClientes() {
     try {
-        await connection.query(
+        await (await connection).query(
             'DROP TABLE produtos;'
         );
     } catch (err) {
@@ -19,7 +19,7 @@ async function dropTableClientes() {
  */
 async function createTableProdutos() {
     try {
-        const [results, fields] = await connection.query(
+        const [results, fields] = await (await connection).query(
             'CREATE TABLE IF NOT EXISTS produtos ' +
       '(id INT PRIMARY KEY AUTO_INCREMENT, nome VARCHAR(255), ' +
       'descricao VARCHAR(255), preco REAL, data_atualizado DATETIME);',
@@ -39,10 +39,10 @@ async function createTableProdutos() {
  * @param {number} preco - Valor do produto
  * @param {date} dataAtualizado - Data da insercao do produto
  */
-export async function insertProduto(nome, descricao, preco, dataAtualizado) {
+async function insertProduto(nome, descricao, preco, dataAtualizado) {
     try {
         createTableProdutos();
-        const [results, fields] = await connection.query(
+        const [results, fields] = await (await connection).query(
             'INSERT INTO produtos (nome, descricao, preco, data_atualizado) ' +
             'VALUES(?, ?, ?, ?);', [nome, descricao, preco, dataAtualizado],
         );
@@ -58,9 +58,9 @@ export async function insertProduto(nome, descricao, preco, dataAtualizado) {
  * @description Busca todos os produtos do BD
  * @return {object}
  */
-export async function getAllProdutos() {
+async function getAllProdutos() {
     try {
-        const [results, fields] = await connection.query(
+        const [results, fields] = await (await connection).query(
             'SELECT * FROM produtos;',
         );
 
@@ -77,9 +77,9 @@ export async function getAllProdutos() {
  * @param {number} id
  * @return {object}
  */
-export async function getProdutoById(id) {
+async function getProdutoById(id) {
     try {
-        const [results, fields] = await connection.query(
+        const [results, fields] = await (await connection).query(
             'SELECT * FROM produtos WHERE id=(?);', [id],
         );
 
@@ -96,9 +96,9 @@ export async function getProdutoById(id) {
  * @param {number} id
  * @param {string} novoNome
  */
-export async function updateProduto(id, novoNome) {
+async function updateProduto(id, novoNome) {
     try {
-        const [results] = await connection.query(
+        const [results] = await (await connection).query(
             'UPDATE produtos SET nome=(?) WHERE id=(?);', [novoNome, id],
         );
 
@@ -111,9 +111,9 @@ export async function updateProduto(id, novoNome) {
  * @description Busca o produto de id igual e deleta do BD
  * @param {number} id
  */
-export async function deleteProduto(id) {
+async function deleteProduto(id) {
     try {
-        const [results] = await connection.query(
+        const [results] = await (await connection).query(
             'DELETE FROM produtos WHERE id=(?);', [id],
         );
 
@@ -122,29 +122,6 @@ export async function deleteProduto(id) {
         console.log(err);
     }
 }
-/*
-// A simple SELECT query
-try {
-  const [results, fields] = await connection.query(
-    'SELECT * FROM `table` WHERE `name` = "Page" AND `age` > 45'
-  );
 
-  console.log(results); // results contains rows returned by server
-  console.log(fields);
-  // fields contains extra meta data about results, if available
-} catch (err) {
-  console.log(err);
-}
-
-// Using placeholders
-try {
-  const [results] = await connection.query(
-    'SELECT * FROM `table` WHERE `name` = ? AND `age` > ?',
-    ['Page', 45]
-  );
-
-  console.log(results);
-} catch (err) {
-  console.log(err);
-}
-*/
+module.exports = {insertProduto, getAllProdutos, getProdutoById,
+    updateProduto, deleteProduto};
