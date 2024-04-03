@@ -1,6 +1,6 @@
 const { getAllClientes, getClienteById, instertCliente,
     updateCliente, deleteCliente } =
-    require('../models/clientesTransactions.js');
+    require('../services/clientesTransactions.js');
 /**
  * @description Classe responsavel para encaminhar as requisicoes para o bd
  */

@@ -1,6 +1,6 @@
 const { getAllProdutos, getProdutoById,
     insertProduto, updateProduto, deleteProduto } =
-    require('../models/produtosTransactions.js');
+    require('../services/produtosTransactions.js');
 
 /**
  * @description Classe responsavel para encaminhar as requisicoes para o bd
