@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        body{
+            background-color: #202124;
+        }
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+        }
+        .button {
+            padding: 10px 20px;
+            background-color: #0074D9;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="button-container">
+        <button class="button" onclick="redirectToPage1()">Produtos</button>
+        <button class="button" onclick="redirectToPage2()">Clientes</button>
+    </div>
+    <script>
+        function redirectToPage1() {
+            // Redirect to another page (e.g., "page1.html")
+            window.location.href = "/produtos";
+        }
+
+        function redirectToPage2() {
+            // Redirect to another page (e.g., "page2.html")
+            window.location.href = "/clientes";
+        }
+    </script>
+</body>
+</html>
