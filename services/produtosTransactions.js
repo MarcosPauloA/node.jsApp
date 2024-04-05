@@ -1,5 +1,5 @@
 const connection = require('../configs/dbConnection.js');
-const createTableProdutos = require('../configs/dbConnection.js');
+const createTableProdutos = require('../models/createTableProdutos.js');
 
 /**
  * @description Insere produto novo
@@ -8,12 +8,13 @@ const createTableProdutos = require('../configs/dbConnection.js');
  * @param {number} preco - Valor do produto
  * @param {date} dataAtualizado - Data da insercao do produto
  */
-async function insertProduto(nome, descricao, preco, dataAtualizado) {
+async function insertProduto(nome, descricao, preco) {
     try {
         createTableProdutos();
+        const hoje = new Date();
         const [results, fields] = await (await connection).query(
             'INSERT INTO produtos (nome, descricao, preco, data_atualizado) ' +
-            'VALUES(?, ?, ?, ?);', [nome, descricao, preco, dataAtualizado],
+            'VALUES(?, ?, ?, ?);', [nome, descricao, preco, hoje],
         );
 
         console.log(results); // results contains rows returned by server
