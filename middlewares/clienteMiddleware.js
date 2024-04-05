@@ -43,7 +43,7 @@ class ClienteMiddleware {
     };
 
     /**
-    * @description Funcao responsavel por validar o sobrenome
+    * @description Funcao responsavel por validar a idade
     * @param {object} request
     * @param {object} response
     * @param {object} next
