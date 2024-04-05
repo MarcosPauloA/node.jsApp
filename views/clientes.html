@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript - Display JSON data as Table</title>
+</head>
+<body>
+  <h1>Display JSON Data as Table.</h1>
+  <button onclick="showTable()">Show List</button>
+  <hr>
+
+  <script>
+    function showTable(){
+      const listaClientes = 
+        [
+          {
+            "id": 1,
+            "nome": "Jesus",
+            "sobrenome": "Cristo",
+            "email": "salvadror777@email.com",
+            "idade": 66
+          }
+        ]
+        createTable(listaClientes);
+    }
+    
+    function createTable(data) {
+      var table = "<table border=1>";
+
+      // now add another row to show subject
+      table += `<tr>
+                  <th>Nome</th>
+                  <th>Sobrenome</th>
+                  <th>Email</th>
+                  <th>Idade</th>
+                </tr>`;
+      // now loop through students
+      // show their name and marks
+      var tr = "";
+      for(let i = 0; i < data.length; i++) {
+        tr += "<tr>";
+        tr += `<td>${data[i].nome}</td>`;
+        tr += `<td>${data[i].sobrenome}</td>`;
+        tr += `<td>${data[i].email}</td>`;
+        tr += `<td>${data[i].idade}</td>`;
+        /*
+        for (var key in data.result[i].marks) {
+          tr += `<td>${data.result[i].marks[key]}</td>`;
+        }
+        */
+        tr += "</tr>"
+      }
+      table += tr + "</table>";
+
+      // append table to body
+      document.body.innerHTML += table;
+    }
+  </script>
+</body>
+</html>
