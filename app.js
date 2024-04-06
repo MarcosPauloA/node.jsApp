@@ -1,7 +1,7 @@
 const express = require('express');
 const routes = require('./routes/index.js');
 
-
+const path = require('path');
 /*
 const createError = require('http-errors');
 const path = require('path');
@@ -16,6 +16,11 @@ app.use((err, req, res, next) => {
     console.log(err);
     res.status(500).send({message: 'Erro interno do servidor'});
 });
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
+
 // app.use(express.json());
 /*
 // catch 404 and forward to error handler

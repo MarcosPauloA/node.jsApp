@@ -68,8 +68,10 @@ async function getProdutoById(id) {
  */
 async function updateProduto(id, novoNome) {
     try {
+        const hoje = new Date();
         const [results] = await (await connection).query(
-            'UPDATE produtos SET nome=(?) WHERE id=(?);', [novoNome, id],
+            'UPDATE produtos SET nome=(?), data_atualizado=(?) '+
+            'WHERE id=(?);', [novoNome, hoje, id],
         );
 
         console.log(results); // results contains rows returned by server

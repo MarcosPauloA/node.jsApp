@@ -14,6 +14,7 @@ class ClienteController {
         try {
             const listaClientes = await getAllClientes();
             res.status(200).json(listaClientes);
+            // res.render('clientes', {listaClientes: listaClientes});
         } catch (erro) {
             res.status(500).json({ message: erro.message});
         }
