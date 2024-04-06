@@ -1,0 +1,1 @@
+Um projeto focado em back-end implementando CRUD com uma API utilizando Express e Node.js
