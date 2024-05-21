@@ -1,6 +1,12 @@
 const { getAllClientes, getClienteById, instertCliente,
     updateCliente, deleteCliente } =
     require('../services/clientesTransactions.js');
+
+// Importando o pacote node cache
+const NodeCache = require('node-cache');
+// Criando uma nova instância de cache
+const cache = new NodeCache;
+
 /**
  * @description Classe responsavel para encaminhar as requisicoes para o bd
  */
@@ -12,9 +18,17 @@ class ClienteController {
     */
     static async listarClientes (req, res) {
         try {
-            const listaClientes = await getAllClientes();
-            res.status(200).json(listaClientes);
-            // res.render('clientes', {listaClientes: listaClientes});
+            if (cache.has('*')) {
+                const listaClientes = cache.get('*');
+                console.log('estava no cache');
+                res.status(200).json(listaClientes);
+            } else {
+                const listaClientes = await getAllClientes();
+                cache.set('*', listaClientes, 60);
+                console.log('não estava no cache');
+                res.status(200).json(listaClientes);
+                // res.render('clientes', {listaClientes: listaClientes});
+            }
         } catch (erro) {
             res.status(500).json({ message: erro.message});
         }
