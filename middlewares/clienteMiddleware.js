@@ -1,3 +1,5 @@
+const cache = require('../configs/cache.js');
+
 /**
  * @description Classe responsavel para validar os dados do cliente
  */
@@ -63,6 +65,28 @@ class ClienteMiddleware {
         }
         next();
     };
+    /**
+ *
+ * @param {object} req
+ * @param {object} res
+ * @param {object} next
+ */
+    static async cacheMiddleware(req, res, next) {
+        // Usando a URL como chave de cache
+        const chave = req.originalUrl;
+        // Tenta obter os dados do cache
+        const dadosCache = cache.get(chave);
+
+        if (dadosCache !== undefined) {
+            // Envia a resposta com os dados do cache, se existirem
+            console.log('Dados recuperados do cache para a URL:', chave);
+            res.send(dadosCache);
+        } else {
+            // Continua com a próxima função de middleware
+            console.log('Dados não encontrados no cache para a URL:', chave);
+            next();
+        }
+    }
 }
 
 module.exports = ClienteMiddleware;
