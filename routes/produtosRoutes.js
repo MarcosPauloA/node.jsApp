@@ -4,7 +4,8 @@ const ProdutoMiddleware = require('../middlewares/produtoMiddleware.js');
 
 const routes = express.Router();
 
-routes.get('/produtos', ProdutosController.listarProdutos);
+routes.get('/produtos', ProdutoMiddleware.cacheMiddleware,
+    ProdutosController.listarProdutos);
 
 routes.get('/produtos/:id', ProdutosController.listaProdutoPorId);
 
