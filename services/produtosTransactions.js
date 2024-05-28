@@ -30,13 +30,11 @@ async function insertProduto(nome, descricao, preco) {
  */
 async function getAllProdutos() {
     try {
-        const [results, fields] = await (await connection).query(
+        const [results] = await (await connection).query(
             'SELECT * FROM produtos;',
         );
 
         // console.log(results); // results contains rows returned by server
-        // fields contains extra meta data about results, if available
-        console.log(fields);
         return results;
     } catch (err) {
         console.log(err);
