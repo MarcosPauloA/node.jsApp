@@ -1,3 +1,5 @@
+const cache = require('../configs/cache.js');
+
 /**
  * @description Classe responsavel para validar os dados do produto
  */

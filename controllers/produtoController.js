@@ -2,6 +2,8 @@ const { getAllProdutos, getProdutoById,
     insertProduto, updateProduto, deleteProduto } =
     require('../services/produtosTransactions.js');
 
+const cache = require('../configs/cache.js');
+
 /**
  * @description Classe responsavel para encaminhar as requisicoes para o bd
  */
@@ -14,9 +16,9 @@ class ProdutoController {
     static async listarProdutos (req, res) {
         try {
             const listaProdutos = await getAllProdutos();
-
+            console.log(listaProdutos);
             // Salva os dados no cache com uma duração de 30 segundos
-            cache.set(req.originalUrl, listaClientes, 30);
+            cache.set(req.originalUrl, listaProdutos, 30);
 
             res.status(200).json(listaProdutos);
         } catch (erro) {
