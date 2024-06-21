@@ -1,5 +1,7 @@
 const express = require('express');
 const routes = require('./routes/index.js');
+const loginRouter = require('./routes/login');
+const logoutRouter = require('./routes/logout');
 
 const path = require('path');
 /*
@@ -10,6 +12,9 @@ const logger = require('morgan');
 */
 const app = express();
 routes(app);
+
+app.use('/login', loginRouter);
+app.use('/logout', logoutRouter);
 
 // error handler
 app.use((err, req, res, next) => {
