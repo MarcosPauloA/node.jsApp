@@ -1,52 +1,51 @@
 const request = require('supertest');
 const app = require('../app.js');
-describe('GET /clientes', () => {
-    it('clientes responds with response!', async () => {
-        const response = await request(app).get('/clientes');
+describe('GET /produtos', () => {
+    it('produtos responds with response!', async () => {
+        const response = await request(app).get('/produtos');
         expect(response.status).toBe(200);
     });
 
-    // Validação de nome e sobrenome
-    it('campos nome e sobrenome válidos', async () => {
-        const response = await request(app).get('/clientes');
+    // Validação de nome do produto e descrição
+    it('campos produto e descrição válidos', async () => {
+        const response = await request(app).get('/produtos');
         for (let i = 0; i < response.body.length; i++) {
             const tamanhoNome = response.body[i].nome.length;
-            const tamanhoSobrenome = response.body[i].sobrenome.length;
+            const tamanhoDescricao = response.body[i].descricao.length;
             // Tamanho entre 3 e 255 caracteres
             expect(tamanhoNome).toBeGreaterThan(2);
             expect(tamanhoNome).toBeLessThan(256);
-            expect(tamanhoSobrenome).toBeGreaterThan(2);
-            expect(tamanhoSobrenome).toBeLessThan(256);
+            expect(tamanhoDescricao).toBeGreaterThan(2);
+            expect(tamanhoDescricao).toBeLessThan(256);
         }
     });
 
-    // Validação de email
-    it('campos de email válidos', async () => {
-        const response = await request(app).get('/clientes');
+    // Validação de preço
+    it('campos de preço válidos', async () => {
+        const response = await request(app).get('/produtos');
         for (let i = 0; i < response.body.length; i++) {
-            const email = response.body[i].email;
-            const regex =
-            /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@a-zA-Z0-9?(?:\.a-zA-Z0-9?)*$/;
-            expect(regex.test(email)).toBeTruthy;
+            const preco = response.body[i].preco;
+            // Checa se o preço é positivo
+            expect((preco)).toBeGreaterThan(0);
         }
     });
 
-    // Validação de idade
-    it('campos de idade válidos', async () => {
-        const response = await request(app).get('/clientes');
+    // Validação de data
+    it('campos de data válidos', async () => {
+        const response = await request(app).get('/produtos');
+        // Loop que percorre todos produtos checando data
         for (let i = 0; i < response.body.length; i++) {
-            const idade = response.body[i].idade;
-            // Checa se idade é positivo e menor do que 120
-            expect(idade).toBeGreaterThanOrEqual(0);
-            expect(idade).toBeLessThan(120);
+            const dateString = response.body[i].data_atualizado;
+            const inputDate = new Date(dateString);
+            // entre 1 de Janeiro de 2000 até dia 20 de Junho de 2024
+            const startDate = new Date('2000-01-01');
+            const endDate = new Date('2024-06-20');
+            const dataValida = inputDate >= startDate && inputDate <= endDate;
+
+            // Checa se a data é válida
+            expect(dataValida).toBeTruthy();
         }
     });
-    /*
-    it('Checado por nomes e sobrenomes válidos'), async () => {
-        const response = await request(app).get('/users');
-        expect(response.status).toBe(200);
-    }
-    */
 });
 
 /*

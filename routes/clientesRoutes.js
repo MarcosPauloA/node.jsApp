@@ -1,13 +1,14 @@
 const express = require('express');
 const ClienteController = require('../controllers/clienteController.js');
 const ClienteMiddleware = require('../middlewares/clienteMiddleware.js');
-
 const routes = express.Router();
 
-routes.get('/clientes', ClienteMiddleware.cacheMiddleware,
+routes.get('/clientes', ClienteMiddleware.verifyJWT,
+    ClienteMiddleware.cacheMiddleware,
     ClienteController.listarClientes);
 
-routes.get('/clientes/:id', ClienteController.listaClientePorId);
+routes.get('/clientes/:id',
+    ClienteController.listaClientePorId);
 
 routes.put('/clientes/:id', ClienteController.putCliente);
 

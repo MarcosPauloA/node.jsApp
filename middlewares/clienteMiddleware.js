@@ -1,9 +1,32 @@
 const cache = require('../configs/cache.js');
-
+const jwt = require('jsonwebtoken');
 /**
  * @description Classe responsavel para validar os dados do cliente
  */
 class ClienteMiddleware {
+/**
+ * @description Função de autenticação de jsonwebtoken
+ * @param {obj} req
+ * @param {obj} res
+ * @param {obj} next
+ * @return {obj} res
+ */
+    static verifyJWT(req, res, next) {
+        console.log(req);
+        // console.log(req.headers['x-access-token']);
+        const SECRET = process.env.TOKEN_SECRET;
+        const token = cache.get('token');
+        if (token !== undefined) {
+            jwt.verify(token, SECRET, (err, decoded) => {
+                console.log(decoded);
+                if (err) return res.status(401).end();
+                req.id = decoded.id;
+                next();
+            });
+        } else {
+            return res.status(401).end();
+        }
+    }
     /**
     * @description Funcao responsavel por validadar o nome
     * @param {object} request

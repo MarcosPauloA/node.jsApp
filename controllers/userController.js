@@ -21,6 +21,20 @@ class UserController {
         }
     }
     /**
+* @description Recebe requisicao get e busca todos os usuarios
+* @param {object} req
+* @param {object} res
+*/
+    static async retornarUsuarios (req, res) {
+        try {
+            const listaUsuarios = await getAllUsers();
+
+            return listaUsuarios;
+        } catch (erro) {
+            res.status(500).json({ message: erro.message});
+        }
+    }
+    /**
      * @description Recebe requisicao de get com parametro id
      * @param {object} req
      * @param {object} res
@@ -61,7 +75,7 @@ class UserController {
      */
     static async postUsuario (req, res) {
         try {
-            const token = jwt.sign(req.body.usuario, req.body.senha);
+            const token = jwt.sign(req.body.usuario, process.env.TOKEN_SECRET);
             instertUser(req.body.usuario, req.body.senha, token);
             res.status(201).send('Usuário cadastrado com sucesso!');
         } catch (erro) {

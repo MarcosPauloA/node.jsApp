@@ -11,7 +11,7 @@ const routes = (app) => {
         path.join(__dirname, '../views/index.html')));
 
     app.use(express.json(), loginRouter);
-    app.use('/logout', logoutRouter);
+    app.use(express.json(), logoutRouter);
 
     app.use(express.json(), clientes);
 
