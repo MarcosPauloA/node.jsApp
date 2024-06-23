@@ -33,7 +33,7 @@ async function getAllClientes() {
         );
 
         // console.log(results); // results contains rows returned by server
-        (await connection).end();
+        // (await connection).end();
         return results;
     } catch (err) {
         console.log(err);
