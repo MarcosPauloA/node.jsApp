@@ -78,7 +78,7 @@ class ClienteController {
                 req.body.email, req.body.idade);
 
             // Remove o cache de clientes para que seja atualizado
-            cache.del(req.originalUrl);
+            cache.flushAll();
 
             res.status(201).send('Cliente cadastrado com sucesso!');
         } catch (erro) {
