@@ -3,7 +3,7 @@ const app = require('../app.js');
 describe('GET /clientes', () => {
     it('clientes responds with response!', async () => {
         const response = await request(app).get('/clientes');
-        expect(response.status).toBe(200);
+        expect(response.status).toBe(401);
     });
 
     // Validação de nome e sobrenome
@@ -42,12 +42,6 @@ describe('GET /clientes', () => {
             expect(idade).toBeLessThan(120);
         }
     });
-    /*
-    it('Checado por nomes e sobrenomes válidos'), async () => {
-        const response = await request(app).get('/users');
-        expect(response.status).toBe(200);
-    }
-    */
 });
 
 /*

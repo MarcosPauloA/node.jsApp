@@ -20,8 +20,8 @@ class ClienteController {
             // Salva os dados no cache com uma duração de 30 segundos
             cache.set(req.originalUrl, listaClientes, 30);
 
-            // res.status(200).json(listaClientes);
-            res.render('clientes', {listaClientes: listaClientes});
+            res.status(200).json(listaClientes);
+            // res.render('clientes', {listaClientes: listaClientes});
         } catch (erro) {
             res.status(500).json({ message: erro.message});
         }

@@ -20,8 +20,8 @@ class ProdutoController {
             // Salva os dados no cache com uma duração de 30 segundos
             cache.set(req.originalUrl, listaProdutos, 30);
 
-            // res.status(200).json(listaProdutos);
-            res.render('produtos', {listaProdutos: listaProdutos});
+            res.status(200).json(listaProdutos);
+            // res.render('produtos', {listaProdutos: listaProdutos});
         } catch (erro) {
             res.status(500).json({ message: erro.message});
         }

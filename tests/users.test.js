@@ -1,8 +1,8 @@
 const request = require('supertest');
 const app = require('../app.js');
-describe('GET /users', () => {
+describe('GET /usuarios', () => {
     it('USERS responds with response!', async () => {
-        const response = await request(app).get('/clientes');
+        const response = await request(app).get('/usuarios');
         expect(response.status).toBe(200);
     });
 });
