@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
-const verifyJWT = require('../middlewares/authMiddleware');
 const UserController = require('../controllers/userController');
 const cache = require('../configs/cache.js');
+const path = require('path');
+
 /* Post login listing. */
 router.post('/', async function(req, res, next) {
-    console.log(req.body);
     try {
         const listaUsuarios = await UserController.retornarUsuarios();
         for (let i = 0; i < listaUsuarios.length; i++) {
@@ -17,6 +17,7 @@ router.post('/', async function(req, res, next) {
                 const token = jwt.sign(req.body.user, secret);
                 // Salva os dados no cache com uma duração de 30 segundos
                 cache.set('token', token);
+                console.log('Logged in successfully!');
                 return res.json({message: 'Logged in successfully! 🎉' });
             }
             res.status(401).end();
@@ -28,9 +29,9 @@ router.post('/', async function(req, res, next) {
 });
 
 // Rota protegida
-router.get('/usuarios', verifyJWT, function(req, res, next) {
-    console.log(req.id + ' fez esta requisição!');
-    res.send('respond with a resource');
+router.get('/login', function(req, res, next) {
+    res.status(200).sendFile(
+        path.join(__dirname, '../views/login.html'));
 });
 
 module.exports = router;
