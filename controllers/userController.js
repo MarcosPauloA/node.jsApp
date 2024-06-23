@@ -15,7 +15,8 @@ class UserController {
         try {
             const listaUsuarios = await getAllUsers();
 
-            res.status(200).json(listaUsuarios);
+            // res.status(200).json(listaUsuarios);
+            res.render('usuarios', {listaUsuarios: listaUsuarios});
         } catch (erro) {
             res.status(500).json({ message: erro.message});
         }
