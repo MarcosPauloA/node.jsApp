@@ -23,16 +23,42 @@
 </head>
 <body>
     <div class="button-container">
-        <button class="button" onclick="redirectToPage1()">Produtos</button>
-        <button class="button" onclick="redirectToPage2()">Clientes</button>
+        <button class="button" onclick="redirectToPageProdutos()">Produtos</button>
+        <button class="button" onclick="redirectToPageUsuarios()">Usuários</button>
+        <button class="button" onclick="redirectToPageLogin()">Login</button>
+        <button class="button" onclick="logout()">Logout</button>
+        <button class="button" onclick="redirectToPageClientes()">Clientes</button>
     </div>
     <script>
-        function redirectToPage1() {
+        function redirectToPageProdutos() {
             // Redirect to another page (e.g., "page1.html")
             window.location.href = "/produtos";
         }
 
-        function redirectToPage2() {
+        function redirectToPageUsuarios() {
+            // Redirect to another page (e.g., "page1.html")
+            window.location.href = "/usuarios";
+        }
+
+        function redirectToPageLogin() {
+            // Redirect to another page (e.g., "page1.html")
+            window.location.href = "/login";
+        }
+
+        function logout(){
+            const url = '/logout'; // Replace with your actual logout URL
+            alert("Logged out!");
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8'
+                }
+            })
+            
+
+        }
+
+        function redirectToPageClientes() {
             // Redirect to another page (e.g., "page2.html")
             window.location.href = "/clientes";
         }

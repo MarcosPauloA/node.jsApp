@@ -1,7 +1,7 @@
 doctype html
 html(lang="pt-br")
     head
-        title Clientes
+        title Produtos
         style.
             body{
                 background-color: #202124;
@@ -21,17 +21,17 @@ html(lang="pt-br")
             }
 
     body
-        h1 Lista de clientes
+        h1 Lista de produtos
         table(border=1)
             tr
                 th Nome 
-                th Sobrenome
-                th Email
-                th Idade
+                th Descrição
+                th Preço
+                th Data
 
-            each item in listaClientes
+            each item in listaProdutos
                 tr
                     td= item.nome 
-                    td= item.sobrenome 
-                    td= item.email
-                    td= item.idade
+                    td= item.descricao 
+                    td= item.preco
+                    td= item.data_atualizado

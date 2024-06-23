@@ -1,7 +1,7 @@
 doctype html
 html(lang="pt-br")
     head
-        title Clientes
+        title Usuários
         style.
             body{
                 background-color: #202124;
@@ -21,17 +21,17 @@ html(lang="pt-br")
             }
 
     body
-        h1 Lista de clientes
+        h1 Lista de usuários
         table(border=1)
             tr
-                th Nome 
-                th Sobrenome
-                th Email
-                th Idade
+                th Id 
+                th Usuário
+                th Senha
+                th Token
 
-            each item in listaClientes
+            each item in listaUsuarios
                 tr
-                    td= item.nome 
-                    td= item.sobrenome 
-                    td= item.email
-                    td= item.idade
+                    td= item.id 
+                    td= item.usuario 
+                    td= item.senha
+                    td= item.token
